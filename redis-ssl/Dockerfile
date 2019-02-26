@@ -1,4 +1,6 @@
-FROM redis:4.0.10
+ARG VERSION
+
+FROM redis:$VERSION
 
 LABEL maintainer="Castle Intelligence, Inc. https://github.com/castle/docker-redis"
 

@@ -1,6 +1,6 @@
 APPLICATION=redis-ssl
 REPOSITORY=castle
-VERSION=4.0.10
+VERSION=${VERSION}
 
 .PHONY: help
 
@@ -10,10 +10,10 @@ help: ## show help
 .DEFAULT_GOAL := help
 
 build: ## build container
-	docker build -t $(APPLICATION) .
+	docker build -t $(APPLICATION) --build-arg VERSION=$(VERSION) .
 
 build-nc: ## build container without caching
-	docker build --no-cache -t $(APPLICATION) .
+	docker build --no-cache -t $(APPLICATION) --build-arg VERSION=$(VERSION) .
 
 release: build-nc publish ## release container to docker hub
 
