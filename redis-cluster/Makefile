@@ -6,21 +6,25 @@ RELEASE=cluster
 
 .PHONY: help
 
-help: ## show help
+help:
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 .DEFAULT_GOAL := help
 
-build: ## build container
+build: docker-build
+
+build-no-cache: docker-build-no-cache
+
+docker-build:
 	docker build -t $(APPLICATION) --build-arg VERSION=$(VERSION) .
 
-build-nc: ## build container without caching
+docker-build-no-cache:
 	docker build --no-cache -t $(APPLICATION) --build-arg VERSION=$(VERSION) .
 
-release: build-nc publish ## release container to docker hub
+release: build-no-cache publish
 
-publish: tag ## publish container tag
+publish: tag
 	docker push $(REPOSITORY)/$(APPLICATION):$(TAG)-$(RELEASE)
 
-tag: ## generate container tag
+tag:
 	docker tag $(APPLICATION) $(REPOSITORY)/$(APPLICATION):$(TAG)-$(RELEASE)
