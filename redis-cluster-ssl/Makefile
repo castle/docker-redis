@@ -2,7 +2,7 @@ APPLICATION=redis
 REPOSITORY=castle
 VERSION=${VERSION}
 TAG=${TAG}
-RELEASE=ssl-cluster
+RELEASE=cluster-ssl
 
 .PHONY: help
 
