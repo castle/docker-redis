@@ -1,6 +1,8 @@
-APPLICATION=redis-ssl
+APPLICATION=redis
 REPOSITORY=castle
-VERSION=4.0.10
+VERSION=${VERSION}
+TAG=${TAG}
+RELEASE=ssl
 
 .PHONY: help
 
@@ -10,17 +12,15 @@ help: ## show help
 .DEFAULT_GOAL := help
 
 build: ## build container
-	docker build -t $(APPLICATION) .
+	docker build -t $(APPLICATION) --build-arg VERSION=$(VERSION) .
 
 build-nc: ## build container without caching
-	docker build --no-cache -t $(APPLICATION) .
+	docker build --no-cache -t $(APPLICATION) --build-arg VERSION=$(VERSION) .
 
 release: build-nc publish ## release container to docker hub
 
-publish: tag ## publish `latest` container tag
-	docker push $(REPOSITORY)/$(APPLICATION):latest
-	docker push $(REPOSITORY)/$(APPLICATION):$(VERSION)
+publish: tag ## publish container tag
+	docker push $(REPOSITORY)/$(APPLICATION):$(TAG)-$(RELEASE)
 
-tag: ## generate container `latest` tag
-	docker tag $(APPLICATION) $(REPOSITORY)/$(APPLICATION):latest
-	docker tag $(APPLICATION) $(REPOSITORY)/$(APPLICATION):$(VERSION)
+tag: ## generate container tag
+	docker tag $(APPLICATION) $(REPOSITORY)/$(APPLICATION):$(TAG)-$(RELEASE)
