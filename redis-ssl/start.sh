@@ -8,7 +8,7 @@ cd /usr/local/etc/stunnel;
 
 chmod 600 rediscert.pem
 
-echo "connect = $HOST:6379" >> stunnel.conf
+echo "connect = 127.0.0.1:6379" >> stunnel.conf
 
 redis-server /usr/local/etc/redis/redis.conf
 stunnel4 /usr/local/etc/stunnel/stunnel.conf
