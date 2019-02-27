@@ -1,6 +1,6 @@
 APPLICATION=redis-ssl
 REPOSITORY=castle
-VERSION=4.0.10
+VERSION=5.0.0
 
 .PHONY: help
 
