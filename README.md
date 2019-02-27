@@ -1,0 +1,13 @@
+# redis-cluster
+
+```
+cd redis-cluster
+make release VERSION=5.0.0 TAG=5.0.0
+```
+
+This will release `castle/redis:5.0.0-cluster` with Redis `5.0.0`.
+
+To use cluster release:
+
+```
+docker run -p 6391:6391 -p 6392:6392 -p 6393:6393 --rm --name redis-cluster castle/redis:5.0.0-cluster```
