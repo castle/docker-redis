@@ -1,3 +1,19 @@
+# redis-ssl
+
+```
+cd redis-ssl
+make release VERSION=5.0.0 TAG=5.0.0
+```
+
+This will release `castle/redis:5.0.0-ssl` with Redis `5.0.0`.
+
+To use cluster release:
+
+```
+docker run -e HOST=127.0.0.1 -p 6380:6380 --rm --name redis-ssl castle/redis:5.0.0-ssl
+```
+
+
 # redis-cluster
 
 ```
