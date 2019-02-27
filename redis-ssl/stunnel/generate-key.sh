@@ -9,7 +9,7 @@ openssl genrsa -out server-key.pem 4096
 # Generate a certificate signing request
 openssl req -subj "/C=US/ST=CA/L=San Francisco/O=Castle Intelligence, Inc./CN=$HOST" -sha256 -new -key server-key.pem -out server.csr
 # Generate a server certificate w/ appropriate options - will ask for passphrase
-echo "subjectAltName = IP:$HOST" > extfile.cnf
+echo "subjectAltName = IP:$IP" > extfile.cnf
 openssl x509 -req -days 365 -sha256 -in server.csr -CA ca.pem -CAkey ca-key.pem -CAcreateserial -out server-cert.pem -extfile extfile.cnf
 # Combine key and certificate for stunnel server
 cat server-key.pem server-cert.pem > ../rediscert.pem
