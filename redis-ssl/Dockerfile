@@ -10,6 +10,8 @@ COPY redis/redis.conf /usr/local/etc/redis/redis.conf
 
 RUN mkdir -p /usr/local/etc/stunnel
 COPY generate-key.sh /usr/local/etc/stunnel
+COPY ca.crt /usr/local/etc/stunnel
+COPY ca.key /usr/local/etc/stunnel
 COPY stunnel/stunnel.conf /usr/local/etc/stunnel
 COPY start.sh /
 

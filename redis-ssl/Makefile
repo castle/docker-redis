@@ -13,9 +13,11 @@ help:
 
 prepare:
 	cp ../shared/generate-key.sh .
+	cp ../shared/ca.crt .
+	cp ../shared/ca.key .
 
 clean:
-	rm generate-key.sh
+	rm ca.crt ca.key generate-key.sh
 
 build: prepare docker-build clean
 
