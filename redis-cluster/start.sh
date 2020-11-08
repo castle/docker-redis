@@ -2,12 +2,14 @@
 
 set -e
 
-redis-server /usr/local/etc/redis/redis.conf --port 6391 --cluster-config-file nodes-6391.conf
-redis-server /usr/local/etc/redis/redis.conf --port 6392 --cluster-config-file nodes-6392.conf
-redis-server /usr/local/etc/redis/redis.conf --port 6393 --cluster-config-file nodes-6393.conf
+cd /usr/local/etc/redis-cluster;
 
-echo 'yes' | redis-cli --cluster create 127.0.0.1:6391 127.0.0.1:6392 127.0.0.1:6393
+ports=(6381 6382 6383 6384 6385 6386)
 
-while true; do
-  :
+for port in "${ports[@]}"; do
+    cd "$port" && redis-server ./redis.conf && cd - >/dev/null;
 done
+
+echo "yes" | redis-cli --cluster create 127.0.0.1:6381 127.0.0.1:6382 127.0.0.1:6383 127.0.0.1:6384 127.0.0.1:6385 127.0.0.1:6386 --cluster-replicas 1;
+
+while true; do sleep 60; done

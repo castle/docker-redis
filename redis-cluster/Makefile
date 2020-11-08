@@ -16,10 +16,10 @@ build: docker-build
 build-no-cache: docker-build-no-cache
 
 docker-build:
-	docker build -t $(APPLICATION) --build-arg VERSION=$(VERSION) .
+	docker build -t $(APPLICATION):$(TAG)-$(RELEASE) --build-arg VERSION=$(VERSION) .
 
 docker-build-no-cache:
-	docker build --no-cache -t $(APPLICATION) --build-arg VERSION=$(VERSION) .
+	docker build --no-cache -t $(APPLICATION):$(TAG)-$(RELEASE) --build-arg VERSION=$(VERSION) .
 
 release: build-no-cache publish
 

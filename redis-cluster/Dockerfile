@@ -4,12 +4,15 @@ FROM redis:$VERSION
 
 LABEL maintainer="Castle Intelligence, Inc. https://github.com/castle/docker-redis"
 
-COPY redis/redis.conf /usr/local/etc/redis/redis.conf
+COPY redis /usr/local/etc/redis-cluster
 
 COPY start.sh /
 
-EXPOSE 6391
-EXPOSE 6392
-EXPOSE 6393
+EXPOSE 6381
+EXPOSE 6382
+EXPOSE 6383
+EXPOSE 6384
+EXPOSE 6385
+EXPOSE 6386
 
 CMD ["/start.sh"]
